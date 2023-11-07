@@ -1,9 +1,7 @@
 pipeline {
-	agent {
-		label 'adi'
-	}
+	agent any
 	tools {
-        maven 'm1' 
+        maven 'm395' 
     }
 	stages {
 		stage ('build') {
