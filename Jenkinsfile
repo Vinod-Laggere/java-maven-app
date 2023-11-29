@@ -5,11 +5,20 @@ pipeline {
             dockerImage = ''
             }
     agent any
+     tools{
+          maven 'm395'
+        }
         stages {
             stage('Cloning our Git') {
             steps {
                 git 'https://github.com/Vinod-Laggere/java-maven-app.git'
             }
+
+            stage(build target){
+			steps{
+				    sh 'mvn clean package'
+			     
+			}
             }
             stage('Building our image') {
                 steps{
