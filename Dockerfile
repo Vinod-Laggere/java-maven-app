@@ -4,7 +4,9 @@ MAINTAINER vinod<vinod@gmail.com>
 
 LABEL "Project"="Jenkins"
 
-RUN apt-get update && apt-get install -y openjdk-11-jdk && apt-get install -y wget && wget https://archive.apache.org/dist/tomcat/tomcat-9/v9.0.50/bin/apache-tomcat-9.0.50.tar.gz && tar -zxvf apache-tomcat-9.0.50.tar.gz
+RUN apt-get update && apt-get install -y openjdk-11-jdk && apt-get install -y wget
+
+RUN wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.83/bin/apache-tomcat-9.0.83.tar.gz &&  tar -zxvf apache-tomcat-9.0.50.tar.gz
 
 WORKDIR /apache-tomcat-9.0.50
 
