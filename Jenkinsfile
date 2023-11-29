@@ -1,30 +1,36 @@
 pipeline {
-	agent any
-	tools {
-        maven 'm395' 
+    environment {
+            registry = "vinodlaggere/abc2"
+            registryCredential = 'B7-dockerhub'
+            dockerImage = ''
+            }
+    agent any
+        stages {
+            stage('Cloning our Git') {
+            steps {
+                git 'https://github.com/Vinod-Laggere/java-maven-app.git'
+            }
+            }
+            stage('Building our image') {
+                steps{
+                 script {
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+            }
+            }
+            }
+            stage('Deploy our image') {
+            steps{
+                script {
+                docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+            }
+            }
+            }
+            }
+            stage('Cleaning up') {
+            steps{
+            sh "docker rmi $registry:$BUILD_NUMBER"
+            }
+            }
     }
-	stages {
-		stage ('build') {
-			steps {
-				sh 'mvn clean install -DskipTests'
-			}
-		
-		}
-		stage ('test') {
-			steps {
-				sh 'mvn test'
-			}
-			post {
-				always {
-					junit 'target/surefire-reports/*.*xml'
-				}
-			}
-		}
-		stage ('run') {
-			steps {
-				sh './scripts/deliver.sh'
-			}
-		
-		}
-	}
 }
