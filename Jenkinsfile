@@ -14,7 +14,7 @@ pipeline {
                 git 'https://github.com/Vinod-Laggere/java-maven-app.git'
             }
 
-            stage(build target) {
+            stage('build target') {
 			steps{
 				    sh 'mvn install'
 			     
