@@ -1,16 +1,12 @@
-FROM ubuntu:20.04
+# Use a Tomcat base image
+FROM tomcat:9.0.55
 
 MAINTAINER vinod<vinod@gmail.com>
 
 LABEL "Project"="Jenkins"
 
-RUN apt-get update && apt-get install -y openjdk-11-jdk && apt-get install -y wget
-
-RUN wget https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.83/bin/apache-tomcat-9.0.83.tar.gz &&  tar -zxvf apache-tomcat-9.0.50.tar.gz
-
-WORKDIR /apache-tomcat-9.0.50
-
-COPY Amazon.war webapps/
+# Copy the WAR file into the webapps directory
+COPY ./**/target/*.war /usr/local/tomcat/webapps/
 
 EXPOSE 8080
 
