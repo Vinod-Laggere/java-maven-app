@@ -6,7 +6,7 @@ pipeline {
     }
     agent any
     tools {
-        maven 'm395'
+        maven '395'
     }
     stages {
         stage('Cloning our Git') {
