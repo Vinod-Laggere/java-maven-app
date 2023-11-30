@@ -6,7 +6,7 @@ MAINTAINER vinod<vinod@gmail.com>
 LABEL "Project"="Jenkins"
 
 # Copy the WAR file into the webapps directory
-COPY ./**/target/*.war /usr/local/tomcat/webapps/
+COPY ./**/target/*.jar /usr/local/tomcat/webapps/
 
 EXPOSE 8080
 
